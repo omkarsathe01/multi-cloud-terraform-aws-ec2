@@ -18,7 +18,7 @@ resource "aws_route_table_association" "route_table_association" {
 }
 
 resource "aws_internet_gateway" "internet_gateway" {
-  vpc_id = aws_vpc.multi_cloud_aws_vpc.id
+  vpc_id = aws_vpc.vpc.id
 }
 
 resource "aws_route" "route" {
@@ -28,7 +28,7 @@ resource "aws_route" "route" {
 }
 
 # resource "aws_security_group" "security_group" {
-#   vpc_id = aws_vpc.multi_cloud_aws_vpc.id
+#   vpc_id = aws_vpc.vpc.id
 
 #   ingress = {
 #     from_port = 80
