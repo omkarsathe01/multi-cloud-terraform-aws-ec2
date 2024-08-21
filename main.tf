@@ -96,6 +96,20 @@ resource "aws_vpc_security_group_ingress_rule" "ingress_rule_allow_https" {
   }
 }
 
+resource "aws_vpc_security_group_ingress_rule" "ingress_rule_allow_ssh" {
+  security_group_id = aws_security_group.security_group.id
+
+  cidr_ipv4   = "0.0.0.0/0"
+  ip_protocol = "tcp"
+  from_port   = 22
+  to_port     = 22
+
+  tags = {
+    Name = "ingress-rule-allow-ssh"
+    App  = "mca"
+  }
+}
+
 # resource "aws_instance" "instance" {
 #   ami                         = var.ami
 #   instance_type               = "t2.micro"
