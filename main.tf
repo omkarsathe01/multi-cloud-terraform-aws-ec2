@@ -128,5 +128,7 @@ resource "aws_instance" "instance" {
 sudo apt update
 sudo apt install nginx -y
 sudo systemctl start nginx
+IP=$(curl http://checkip.amazonaws.com)
+echo http://$IP/
 EOF
 }
