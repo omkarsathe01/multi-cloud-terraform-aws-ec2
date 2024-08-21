@@ -1,15 +1,30 @@
 resource "aws_vpc" "vpc" {
   cidr_block = var.vpc_cidr_block
+
+  tags = {
+    Name = "multi-cloud-vpc"
+    App  = "mca"
+  }
 }
 
 resource "aws_subnet" "subnet" {
   vpc_id            = aws_vpc.vpc.id
   cidr_block        = cidrsubnet(aws_vpc.vpc.cidr_block, 8, 1)
   availability_zone = var.availability_zone
+
+  tags = {
+    Name = "multi-cloud-subnet"
+    App  = "mca"
+  }
 }
 
 resource "aws_route_table" "route_table" {
   vpc_id = aws_vpc.vpc.id
+
+  tags = {
+    Name = "multi-cloud-route-table"
+    App  = "mca"
+  }
 }
 
 resource "aws_route_table_association" "route_table_association" {
@@ -19,6 +34,11 @@ resource "aws_route_table_association" "route_table_association" {
 
 resource "aws_internet_gateway" "internet_gateway" {
   vpc_id = aws_vpc.vpc.id
+
+  tags = {
+    Name = "multi-cloud-internet-gateway"
+    App  = "mca"
+  }
 }
 
 resource "aws_route" "route" {
