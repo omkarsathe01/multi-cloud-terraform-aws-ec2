@@ -47,16 +47,54 @@ resource "aws_route" "route" {
   gateway_id             = aws_internet_gateway.internet_gateway.id
 }
 
-# resource "aws_security_group" "security_group" {
-#   vpc_id = aws_vpc.vpc.id
+resource "aws_security_group" "security_group" {
+  vpc_id = aws_vpc.vpc.id
 
-#   ingress = {
-#     from_port = 80
-#     to_port = 80
-#     protocol = "tcp"
-#     cidr_blocks = ["0.0.0.0/0"]
-#   }
-# }
+  tags = {
+    Name = "multi-cloud-security-group"
+    App  = "mca"
+  }
+}
+
+resource "aws_vpc_security_group_egress_rule" "egress_rule_allow_outbound" {
+  security_group_id = aws_security_group.security_group.id
+
+  cidr_ipv4   = "0.0.0.0/0"
+  ip_protocol = -1
+
+  tags = {
+    Name = "egress-rule-allow-outbound"
+    App  = "mca"
+  }
+}
+
+resource "aws_vpc_security_group_ingress_rule" "ingress_rule_allow_http" {
+  security_group_id = aws_security_group.security_group.id
+
+  cidr_ipv4   = "0.0.0.0/0"
+  ip_protocol = "tcp"
+  from_port   = 443
+  to_port     = 443
+
+  tags = {
+    Name = "ingress-rule-allow-http"
+    App  = "mca"
+  }
+}
+
+resource "aws_vpc_security_group_ingress_rule" "ingress_rule_allow_https" {
+  security_group_id = aws_security_group.security_group.id
+
+  cidr_ipv4   = "0.0.0.0/0"
+  ip_protocol = "tcp"
+  from_port   = 80
+  to_port     = 80
+
+  tags = {
+    Name = "ingress-rule-allow-https"
+    App  = "mca"
+  }
+}
 
 # resource "aws_instance" "instance" {
 #   ami                         = var.ami
