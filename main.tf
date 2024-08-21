@@ -123,9 +123,9 @@ resource "aws_instance" "instance" {
     volume_size = 30
   }
 
-  user_data                   =
-  <<EOF
-    sudo apt update
-    sudo apt install nginx
+  user_data = <<EOF
+  #!/bin/bash
+  sudo apt update
+  sudo apt install nginx
   EOF
 }
