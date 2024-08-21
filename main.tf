@@ -124,9 +124,10 @@ resource "aws_instance" "instance" {
   }
 
   user_data = <<EOF
-  #!/bin/bash
-  sudo apt update
-  sudo apt install nginx -y
-  sudo systemctl start nginx
-  EOF
+#!/bin/bash
+mkdir omkar
+sudo apt update
+sudo apt install nginx -y
+sudo systemctl start nginx
+EOF
 }
