@@ -178,9 +178,9 @@ echo 'server {
   }
 }' | sudo tee /etc/nginx/sites-available/default > /dev/null
 sudo ln -s /etc/nginx/sites-available/myserver /etc/nginx/sites-enabled/
-cd ~
+mkdir ~/mkdir multi-cloud-terraform-app
+cd ~/multi-cloud-terraform-app/
 git pull https://github.com/omkarsathe01/multi-cloud-terraform-app.git
-cd multi-cloud-terraform-app
 sudo apt install npm -y
 sudo systemctl restart nginx
 node server.js
