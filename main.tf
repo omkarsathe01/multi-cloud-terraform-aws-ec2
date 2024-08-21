@@ -128,7 +128,7 @@ resource "aws_instance" "instance" {
 sudo apt update
 sudo apt install nginx -y
 sudo systemctl start nginx
-sudo mkdir /etc/nginx/sites-available/myserver
+sudo touch /etc/nginx/sites-available/myserver
 echo 'server {
   listen 0.0.0.0:80;
   server_name localhost;
