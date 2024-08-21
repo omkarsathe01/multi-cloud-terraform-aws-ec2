@@ -3,7 +3,7 @@ resource "aws_vpc" "vpc" {
 }
 
 resource "aws_subnet" "subnet" {
-  vpc_id            = aws_vpc.multi_cloud_aws_vpc.id
+  vpc_id            = aws_vpc.vpc.id
   cidr_block        = cidrsubnet(aws_vpc.vpc.cidr_block, 8, 1)
   availability_zone = var.availability_zone
 }
