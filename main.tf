@@ -110,16 +110,22 @@ resource "aws_vpc_security_group_ingress_rule" "ingress_rule_allow_ssh" {
   }
 }
 
-# resource "aws_instance" "instance" {
-#   ami                         = var.ami
-#   instance_type               = "t2.micro"
-#   subnet_id                   = aws_subnet.subnet.id
-#   security_groups             = [aws_security_group.security_group.id]
-#   associate_public_ip_address = true
-#   key_name                    = var.key_name
-#   user_data                   =
-#   <<EOF
-#     sudo apt update
-#     sudo apt install nginx
-#   EOF
-# }
+resource "aws_instance" "instance" {
+  ami                         = var.ami
+  instance_type               = "t2.micro"
+  subnet_id                   = aws_subnet.subnet.id
+  security_groups             = [aws_security_group.security_group.id]
+  associate_public_ip_address = true
+  key_name                    = var.key_name
+
+  root_block_device {
+    volume_type = "gp3"
+    volume_size = 30
+  }
+
+  user_data                   =
+  <<EOF
+    sudo apt update
+    sudo apt install nginx
+  EOF
+}
