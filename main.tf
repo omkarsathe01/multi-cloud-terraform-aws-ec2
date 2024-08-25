@@ -186,3 +186,131 @@
 # node server.js
 # EOF
 # }
+
+# resource "aws_vpc" "microservice_app_vpc" {
+#   cidr_block = "192.168.0.0/27"
+
+#   tags = {
+#     Name = "microservice-app-vpc"
+#     app  = "microservice"
+#   }
+# }
+
+# resource "aws_subnet" "microservice_app_public_subnet" {
+#   vpc_id            = aws_vpc.microservice_app_vpc.id
+#   availability_zone = "us-east-1b"
+#   cidr_block        = "192.168.0.16/28"
+
+#   tags = {
+#     Name = "microservice-app-public-subnet"
+#     app  = "microservice"
+#     vpc  = "microservice-app-vpc"
+#   }
+# }
+
+# resource "aws_subnet" "microservice_app_private_subnet" {
+#   vpc_id     = aws_vpc.microservice_app_vpc.id
+#   cidr_block = "192.168.0.0/28"
+
+#   tags = {
+#     Name = "microservice-app-private-subnet"
+#     app  = "microservice"
+#     vpc  = "microservice-app-vpc"
+#   }
+# }
+
+# resource "aws_vpc" "vpc-0d8fef82400355a15" {
+#   cidr_block = "10.0.0.0/16"
+# }
+
+# resource "aws_subnet" "subnet-0fd0e5bfeaa747624" {
+#   vpc_id     = aws_vpc.vpc-0d8fef82400355a15.id
+#   cidr_block = "10.0.0.0/24"
+# }
+
+# resource "aws_route_table" "rtb-0531fad4aeb177114" {
+#   vpc_id = aws_vpc.microservice_app_vpc.id
+# }
+
+# resource "aws_route_table" "rtb-0e46efcf11401263d" {
+#   vpc_id = aws_vpc.vpc-0d8fef82400355a15.id
+# }
+
+# resource "aws_route_table" "rtb-047bd9d51f8b1eadb" {
+#   vpc_id = aws_vpc.microservice_app_vpc.id
+# }
+
+# resource "aws_internet_gateway" "microservice_app_internet_gateway" {
+#   vpc_id = "vpc-009d403e2d3970c3a"
+
+#   tags = {
+#     Name   = "microservice-app-internet-gateway"
+#     app    = "microservice"
+#     subnet = "microservice-app-public-subnet"
+#     vpc    = "microservice-app-vpc"
+#   }
+# }
+
+# resource "aws_default_network_acl" "acl-0427d4330bcec56a8" {
+#   default_network_acl_id = "acl-0427d4330bcec56a8"
+#   subnet_ids             = ["subnet-0fd0e5bfeaa747624"]
+
+#   egress {
+#     action     = "allow"
+#     cidr_block = "0.0.0.0/0"
+#     from_port  = 0
+#     to_port    = 0
+#     protocol   = "-1"
+#     rule_no    = 100
+#   }
+
+#   ingress {
+#     action     = "allow"
+#     cidr_block = "0.0.0.0/0"
+#     from_port  = 0
+#     to_port    = 0
+#     protocol   = "-1"
+#     rule_no    = 100
+#   }
+# }
+
+# resource "aws_default_network_acl" "acl-0194e99bf55185cf7" {
+#   default_network_acl_id = "acl-0194e99bf55185cf7"
+#   subnet_ids             = ["subnet-02219e0caf5c3fa8a", "subnet-0b885c401c63ba800"]
+
+#   egress {
+#     action     = "allow"
+#     cidr_block = "0.0.0.0/0"
+#     protocol   = "-1"
+#     from_port  = 0
+#     to_port    = 0
+#     rule_no    = 100
+#   }
+
+#   ingress {
+#     action     = "allow"
+#     cidr_block = "0.0.0.0/0"
+#     protocol   = "-1"
+#     rule_no    = 100
+#     from_port  = 0
+#     to_port    = 0
+#   }
+# }
+
+# resource "aws_security_group" "sg-07b2516377137b5ce" {
+#   description = "default VPC security group"
+#   name        = "default"
+# }
+
+# resource "aws_security_group" "sg-04035163f45ec47d3" {
+#   description = "microservice-app-security-group created 2024-08-15T05:02:31.948Z"
+# }
+
+# resource "aws_security_group" "sg-06c03239b9aaba9db" {
+#   description = "default VPC security group"
+# }
+
+# resource "aws_route_table_association" "rtbassoc-019dc5d9fdd8a44fc" {
+#   route_table_id = aws_route_table.rtb-0531fad4aeb177114.id
+#   subnet_id      = ""
+# }
